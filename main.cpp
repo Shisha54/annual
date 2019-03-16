@@ -3,6 +3,6 @@
 int main()
 {
     qDebug() << "Hello, World!";
-    qDebug() << "From damir's computer";
+    qDebug() << "Hueta polnaya";
     return 0;
 }
