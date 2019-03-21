@@ -1,5 +1,7 @@
-#include "mainwindow.h"
-#include <QApplication>
+#include <vector>
+#include <iostream>
+
+#include "graph.h"
 
 //Программа для просмотра карт (недо-редактор карт). Карта - файл содержаший граф(неориентированный) и картинка, на которую натягивается граф
 
@@ -11,11 +13,11 @@
 //Предложение по выполнению 1 - Дамир 2 - Миша 3 - Денис 4 - Ярсолав
 //Итог - Примитивная программа для просмотра (а может позже и для редактирования) карт. Разработанный и понятный всем формат карты, способы работы с ним
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+// ПЕРВЫЕ ДВА ПУНКТА ЕСТЬ
 
-    return a.exec();
+int main()
+{
+    Graph g("E:\\kds\\Projects\\Qt\\annual\\tools\\tools_mapViewer\\test.txt");
+    g._print();
+    return 0;
 }
