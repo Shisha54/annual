@@ -6,7 +6,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Map map("D:\\kds\\projects\\Qt\\annual\\annual\\tools\\tools_mapPreview\\map\\");
+    Map map("B:\\qtProjects\\annual\\tools\\tools_mapPreview\\map\\");
     QGraphicsView view(map.generateScene());
     view.show();
     return a.exec();
