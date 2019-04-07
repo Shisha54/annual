@@ -18,7 +18,8 @@ SOURCES += \
         main.cpp \
     map.cpp \
     vertex.cpp \
-    graph.cpp
+    graph.cpp \
+    player.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -26,4 +27,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    graph.h
+    graph.h \
+    player.h \
+    gamelogic.h

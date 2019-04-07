@@ -8,6 +8,9 @@
 
 #include <QDebug>
 
+#include "player.h"
+#include "gamelogic.h"
+
 namespace Map {
 
 //Класс VertexG содержит информацию о внешнем виде вершины графа - положение на карте, внешний вид итд
@@ -19,9 +22,15 @@ namespace Map {
 
 //Класс VertexL содержит информацию о вершине графа как о элементе игровой логики
 
-    class VertexL
+    class VertexL : public GameLogic::Province
     {
         //Наладить отдельное взаимодействие экземпляра класса с отдельным классом игровой логики (а мб и нет) - передвижение итд
+        Player::Player * owner;
+        GameLogic::Army * army;
+        GameLogic::ArmyOrder armyOrder;
+        GameLogic::BuildOrder buildOrder;
+    public:
+
     };
         //МБ СНЕСТИ ОПРЕДЕЛЕНИЕ ЭТИХ КЛАССОВ В ОТДЕЛЬНЫЙ ФАЙЛ ( gamelogic.h graphics.h )
 
