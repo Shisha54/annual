@@ -1,10 +1,10 @@
-#include "graph.h"
+#include "map.h"
+
 
 #include <QDebug>
 
 int main()
 {
-    Graph x;
-
+    Map map;
     return 0;
 }

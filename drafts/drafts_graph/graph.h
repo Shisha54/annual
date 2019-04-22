@@ -66,16 +66,7 @@ namespace Map {
     class Graph
     {
             public:
-        std::vector<Vertex> verticies;
 
-        void addVertex(); //Enrich parameters
-        void addVertex(Vertex &x); //Copies exactly with deleting all edges
-        void addEdge(Vertex *x, Vertex *y); //Add edge by pointer
-        void addEdge(Vertex &x, Vertex &y); //Add edge by reference
-        void delEdge(Vertex *x, Vertex *y); //Deletes edge
-        void delEdge(Vertex &x, Vertex &y); //Deletes edge
-        void delVertex(Vertex &x);
-        void delVertex(Vertex *x);
 
         void loadFromFile(std::string path); //Load graph from a file
     };

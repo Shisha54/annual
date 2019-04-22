@@ -1,9 +1,24 @@
-#ifndef ARMY_H
-#define ARMY_H
+#include "army.h"
 
-class Army
+void Army::reset()
 {
-    int strength;
-};
+    available = strength;
+}
 
-#endif // ARMY_H
+void Army::mov(int amount)
+{
+    moving += amount;
+    strength -= amount;
+    available -= amount;
+}
+
+void Army::add(int amount)
+{
+    strength += amount;
+}
+
+void Army::ret(int amount)
+{
+    moving -= amount;
+    strength += amount;
+}

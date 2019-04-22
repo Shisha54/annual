@@ -1,12 +1,10 @@
 #include "graph.h"
-#include "map.h"
-#include <QApplication>
-#include <QGraphicsView>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Map map("B:\\qtProjects\\annual\\tools\\tools_mapPreview\\map\\");
+    Map map("D:\\kds\\projects\\Qt\\annual\\annual\\tools\\tool_mapEditor\\map");
+    map.graph.addPoint(444,555);
     QGraphicsView view(map.generateScene());
     view.show();
     return a.exec();

@@ -1,44 +1,106 @@
-#ifndef GRAPH_H
-#define GRAPH_H
+#include "graph.h"
 
-#include <vector>
-
-//typedef int GraphIndex;
-
-template<typename T> class Vertex
+template<typename T> Vertex<T>::Vertex()
 {
-    std::vector<Vertex*> adjacent;
-    T contents;
-    //Those functions apply changes only to the current object therefore private
+    //TODO отнаследовать или выполнить конструкторы по умолчанию VertexG S
+}
 
-    void addEdge(Vertex *x); //Add edge by pointer
-    void addEdge(Vertex &x); //Add edge by reference
-    void delEdge(Vertex *x); //Deletes edge
-    void delEdge(Vertex &x); //Deletes edge
-
-    Vertex();
-public:
-
-    bool checkEdge(Vertex *x); //Check if there is an edge
-    bool checkEdge(const Vertex &x); //Check if there is an edge
-
-    friend bool operator==(const Vertex& x, const Vertex& y);
-    template<typename U> friend class Graph;
-};
-
-template<typename T> class Graph
+template<typename T> bool operator==(const Vertex<T>& x, const Vertex<T>& y)
 {
-        public:
-    std::vector<Vertex<T>> verticies;
-        //public:
-    void addVertex(); //Enrich parameters
-    void addVertex(Vertex<T> &x); //Copies exactly with deleting all edges
-    void addEdge(Vertex<T> *x, Vertex<T> *y); //Add edge by pointer
-    void addEdge(Vertex<T> &x, Vertex<T> &y); //Add edge by reference
-    void delEdge(Vertex<T> *x, Vertex<T> *y); //Deletes edge
-    void delEdge(Vertex<T> &x, Vertex<T> &y); //Deletes edge
-    void delVertex(Vertex<T> &x);
-    void delVertex(Vertex<T> *x);
-};
+    return (&x == &y);
+}
 
-#endif // GRAPH_H
+template<typename T> bool Vertex<T>::checkEdge(Vertex *x) //Check if there is an edge
+{
+    if(*x==*this)
+        return 0;
+    for(auto i = adjacent.begin(); i != adjacent.end(); ++i)
+        if(*x==(**i))
+            return 1;
+    return 0;
+}
+
+template<typename T> bool Vertex<T>::checkEdge(const Vertex &x) //Check if there is an edge
+{
+    if(x==*this)
+        return 0;
+    for(auto i = adjacent.begin(); i != adjacent.end(); ++i)
+        if(x==(**i))
+            return 1;
+    return 0;
+}
+
+template<typename T> void Vertex<T>::addEdge(Vertex *x) //Add existing edge by pointer
+{
+    if(this==x)
+        return;
+    if(!checkEdge(x))
+        adjacent.push_back(x);
+}
+
+template<typename T> void Vertex<T>::addEdge(Vertex& x) //Add existing edge by reference
+{
+    if(*this==x)
+        return;
+    if(!checkEdge(x))
+        adjacent.push_back(&x);
+}
+
+template<typename T> void Vertex<T>::delEdge(Vertex *x) //Deletes edge
+{
+    adjacent.erase(std::remove(adjacent.begin(), adjacent.end(), x), adjacent.end());
+}
+
+template<typename T> void Vertex<T>::delEdge(Vertex &x) //Deletes edge
+{
+    adjacent.erase(std::remove(adjacent.begin(), adjacent.end(), &x), adjacent.end());
+}
+
+template<typename T> void Graph<T>::addVertex(Vertex<T> &x) //Copies exactly with deleting all edges
+{
+    verticies.push_back(x);
+    verticies.back().adjacent.clear();
+}
+
+template<typename T> void Graph<T>::addVertex()
+{
+    verticies.emplace_back(Vertex<T>()); // EMPLACE - for optimization - no copying or moving!
+}
+
+template<typename T> void Graph<T>::delEdge(Vertex<T> *x, Vertex<T> *y) //Deletes edge
+{
+    x->delEdge(y);
+    y->delEdge(x);
+}
+
+template<typename T> void Graph<T>::delEdge(Vertex<T> &x, Vertex<T> &y) //Deletes edge
+{
+    x.delEdge(y);
+    y.delEdge(x);
+}
+
+template<typename T> void Graph<T>::delVertex(Vertex<T> &x)
+{
+    for(auto i = x.adjacent.begin(); i != x.adjacent.end(); ++i)
+        (*i)->delEdge(x);
+    verticies.erase(std::remove(verticies.begin(), verticies.end(), x), verticies.end());
+}
+
+template<typename T> void Graph<T>::delVertex(Vertex<T> *x)
+{
+    for(auto i = x->adjacent.begin(); i != x->adjacent.end(); ++i)
+        (*i)->delEdge(x);
+    verticies.erase(std::remove(verticies.begin(), verticies.end(), *x), verticies.end());
+}
+
+template<typename T> void Graph<T>::addEdge(Vertex<T> *x, Vertex<T> *y) //Add edge by pointer
+{
+    x->addEdge(y);
+    y->addEdge(x);
+}
+
+template<typename T> void Graph<T>::addEdge(Vertex<T> &x, Vertex<T> &y) //Add edge by reference
+{
+    x.addEdge(y);
+    y.addEdge(x);
+}

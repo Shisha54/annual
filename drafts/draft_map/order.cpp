@@ -1,18 +1,16 @@
-#ifndef ORDERS_H
-#define ORDERS_H
+#include "order.h"
 
-#include "graph.h"
-#include "army.h"
-#include "buildings.h"
-
-class ArmyOrder
-{
-    int destination; // .at() or [] in Graph
-};
-
-class BuildOrder
+template<typename T> void ArmyOrder<T>::init(Vertex<T> origin)
 {
 
-};
+}
 
-#endif // ORDERS_H
+template<typename T> void ArmyOrder<T>::move()
+{
+
+}
+
+template<typename T> void ArmyOrder<T>::fin()
+{
+
+}

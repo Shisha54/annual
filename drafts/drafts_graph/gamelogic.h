@@ -6,6 +6,7 @@ namespace GameLogic {
     class Province
     {
         bool isCity;
+        int roadLevel;
     };
 
     class Army
